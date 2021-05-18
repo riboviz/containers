@@ -25,12 +25,12 @@ From: ubuntu:18.04
     wget https://sourceforge.net/projects/bowtie-bio/files/bowtie/1.2.2/bowtie-1.2.2-linux-x86_64.zip/download -O /env/bowtie.zip && \
     unzip /env/hisat2-2.1.0-Linux_x86_64.zip && unzip /env/bowtie.zip && \
     export PATH=/root/hisat2-2.1.0:$PATH && export PATH=/root/bowtie-1.2.2-linux-x86_64/:$PATH && \
-    conda install -y -c bioconda nextflow && \
+    conda install -y -c bioconda nextflow=20.10.0 && \
     echo 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'>>/etc/apt/sources.list && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     apt-get update && apt-get install -y r-base r-base-dev libxml2-dev libssl-dev libcurl4-openssl-dev && \
-    R -e "install.packages('testthat'); install.packages('RcppRoll'); install.packages('optparse'); install.packages('tidyr'); install.packages('ggplot2'); install.packages('shiny'); install.packages('plotly'); install.packages('readr'); install.packages('git2r'); install.packages('git2r'); install.packages('here'); install.packages('BiocManager'); BiocManager::install('Rsamtools'); BiocManager::install('rtracklayer');  BiocManager::install('rhdf5'); BiocManager::install('Biostrings'); BiocManager::install('ShortRead')" && \
-    mkdir riboviz && cd riboviz && git clone https://github.com/riboviz/riboviz && cd riboviz && git checkout develop && cd .. && git clone https://github.com/riboviz/example-datasets.git && cd ~ && touch /env/setenv.sh && echo '#!/bin/bash'>>/env/setenv.sh && echo 'export PATH=/env/hisat2-2.1.0:$PATH'>>/env/setenv.sh && echo 'export PATH=/env/bowtie-1.2.2-linux-x86_64/:$PATH'>>/env/setenv.sh && echo 'source /env/miniconda3/bin/activate'>>/env/setenv.sh && echo 'conda activate riboviz'>>/env/setenv.sh && \
+    R -e "install.packages('testthat'); install.packages('RcppRoll'); install.packages('optparse'); install.packages('tidyr'); install.packages('ggplot2'); install.packages('shiny'); install.packages('plotly'); install.packages('readr'); install.packages('git2r'); install.packages('tidyverse'); install.packages('here'); install.packages('BiocManager'); BiocManager::install('Rsamtools'); BiocManager::install('rtracklayer');  BiocManager::install('rhdf5'); BiocManager::install('Biostrings'); BiocManager::install('ShortRead')" && \
+    cd / && mkdir riboviz && mkdir data && cd ~ && touch /env/setenv.sh && echo '#!/bin/bash'>>/env/setenv.sh && echo 'export PATH=/env/hisat2-2.1.0:$PATH'>>/env/setenv.sh && echo 'export PATH=/env/bowtie-1.2.2-linux-x86_64/:$PATH'>>/env/setenv.sh && echo 'source /env/miniconda3/bin/activate'>>/env/setenv.sh && echo 'conda activate riboviz'>>/env/setenv.sh && \
     conda clean -t -y && apt-get clean && apt-get autoremove && apt-get autoclean && rm -rf *.zip && rm -rf miniconda3.sh
 
