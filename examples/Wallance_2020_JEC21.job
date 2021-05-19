@@ -3,8 +3,8 @@
 #$ -N example-Wallance
 #$ -cwd
 #$ -l h_rt=8:0:00
-#$ -l h_vmem=8G
-#$ -pe sharedmem 8
+#$ -l h_vmem=16G
+#$ -pe sharedmem 16
 #$ -o $JOB_NAME-$JOB_ID-$HOSTNAME.o
 #$ -e $JOB_NAME-$JOB_ID-$HOSTNAME.e
 #$ -m beas
@@ -22,6 +22,8 @@
 lscpu
 #!/usr/bin/env bash
 module load singularity
+export SINGULARITY_TMPDIR=$TMPDIR
+export SINGULARITY_CACHEDIR=/exports/eddie/scratch/<your id>/cache
 
 cd /exports/eddie/scratch/<your id>/
-singularity run --writable riboviz_singularity /bin/bash -c "cd /env ;source setenv.sh ;cd riboviz/riboviz ; nextflow run prep_riboviz.nf -params-file Wallace_2020_JEC21/Wallace_2020_JEC21_2-samples_10p_up12dwn9_CDS_120bpL_120bpR_config.yaml -work-dir Wallace_2020_JEC21/work -ansi-log false -with-report"
+singularity -vvv run -B /local:/local -B /exports/eddie/scratch/<your id>/riboviz:/riboviz -B /exports/eddie/scratch/<your id>/Wallace_2020_JEC21:/Wallace_2020_JEC21 riboviz_singularity.sif /bin/bash -c "cd /env;source setenv.sh;cd /riboviz/riboviz/; nextflow run prep_riboviz.nf -params-file Wallace_2020_JEC21/Wallace_2020_JEC21_2-samples_10p_up12dwn9_CDS_120bpL_120bpR_config.yaml -work-dir Wallace_2020_JEC21/work -ansi-log false"
