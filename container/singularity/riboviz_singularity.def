@@ -8,7 +8,7 @@ From: ubuntu:18.04
     mkdir env
     cd /env && \
     apt-get update && \
-    apt-get install -y git curl bedtools hdf5-tools pigz nano unzip wget gnupg && \
+    apt-get install -y git curl bedtools hdf5-tools pigz nano unzip wget gnupg pandoc graphviz libgit2-dev && \
     apt-get autoclean -y && apt-get autoremove -y && \
     wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /env/miniconda3.sh && \
     bash /env/miniconda3.sh -b -p /env/miniconda3 && \
@@ -21,6 +21,10 @@ From: ubuntu:18.04
     pip install gffutils && \
     conda install -y -c anaconda h5py && \
     conda install -y -c bioconda umi_tools && \
+    conda install -y pylint && \
+    conda install -y pycodestyle && \
+    conda install -y pytest-cov && \
+    pip install sphinx && \
     wget ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/downloads/hisat2-2.1.0-Linux_x86_64.zip -O /env/hisat2-2.1.0-Linux_x86_64.zip && \
     wget https://sourceforge.net/projects/bowtie-bio/files/bowtie/1.2.2/bowtie-1.2.2-linux-x86_64.zip/download -O /env/bowtie.zip && \
     unzip /env/hisat2-2.1.0-Linux_x86_64.zip && unzip /env/bowtie.zip && \
@@ -30,7 +34,6 @@ From: ubuntu:18.04
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     apt-get update && apt-get install -y r-base r-base-dev libxml2-dev libssl-dev libcurl4-openssl-dev && \
-    R -e "install.packages('testthat'); install.packages('RcppRoll'); install.packages('optparse'); install.packages('tidyr'); install.packages('ggplot2'); install.packages('shiny'); install.packages('plotly'); install.packages('readr'); install.packages('git2r'); install.packages('tidyverse'); install.packages('here'); install.packages('BiocManager'); BiocManager::install('Rsamtools'); BiocManager::install('rtracklayer');  BiocManager::install('rhdf5'); BiocManager::install('Biostrings'); BiocManager::install('ShortRead')" && \
+    R -e "install.packages('testthat'); install.packages('RcppRoll'); install.packages('optparse'); install.packages('tidyr'); install.packages('ggplot2'); install.packages('shiny'); install.packages('plotly'); install.packages('readr'); install.packages('git2r'); install.packages('tidyverse'); install.packages('here'); install.packages('BiocManager'); BiocManager::install('Rsamtools'); BiocManager::install('rtracklayer');  BiocManager::install('rhdf5'); BiocManager::install('Biostrings'); BiocManager::install('ShortRead'); install.packages('rmarkdown'); install.packages('knitr');install.packages('lintr'); install.packages('styler'); install.packages('roxygen2'); install.packages('devtools'); install.packages('glue'); install.packages('withr')" && \
     cd / && mkdir riboviz && mkdir data && cd ~ && touch /env/setenv.sh && echo '#!/bin/bash'>>/env/setenv.sh && echo 'export PATH=/env/hisat2-2.1.0:$PATH'>>/env/setenv.sh && echo 'export PATH=/env/bowtie-1.2.2-linux-x86_64/:$PATH'>>/env/setenv.sh && echo 'source /env/miniconda3/bin/activate'>>/env/setenv.sh && echo 'conda activate riboviz'>>/env/setenv.sh && \
-    conda clean -t -y && apt-get clean && apt-get autoremove && apt-get autoclean && rm -rf *.zip && rm -rf miniconda3.sh
-
+    conda clean -t -y && apt-get -y clean && apt-get -y autoremove && apt-get -y autoclean && rm -rf /env/*.zip && rm -rf /env/miniconda3.sh
