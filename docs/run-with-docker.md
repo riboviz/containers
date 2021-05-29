@@ -196,7 +196,7 @@ Please notice that Docker does **NOT** allow user to bind new folder to a existi
 ## step 2.3: Run the vignette dataset
 To run the RiboViz with the vignette dataset, you can run:
 ```console
-$ docker exec riboviz1 /bin/bash -c "cd /env ;source setenv.sh ;cd /riboviz; nextflow run prep_riboviz.nf -params-file vignette/vignette_config.yaml -ansi-log false
+$ docker exec riboviz1 /bin/bash -c "cd /env ;source setenv.sh ;cd /riboviz; nextflow run prep_riboviz.nf -params-file vignette/vignette_config.yaml -ansi-log false"
 ```
 This command will first activate the environment, then run the workflow.
 
@@ -248,7 +248,7 @@ $ git clone https://github.com/riboviz/example-datasets.git
 ```
 
 To prepare the dataset, you need to download and install `sratoolkit` to generate fastq files. The documentation on that software can be found at [https://hpc.nih.gov/apps/sratoolkit.html](https://hpc.nih.gov/apps/sratoolkit.html). 
-**If you don't have sratoolkit installed on you PC, it is recommended to generate the fastq files on Eddie, then download them to your PC**
+**If you don't have sratoolkit installed on you PC, you can generate the fastq files on Eddie, then download them to your PC**
 Take the Wallace dataset as an example, you should run the following command **on Eddie** to generate the fastq files:
 ```console
 $ cd /exports/eddie/scratch/$USER/
@@ -312,7 +312,7 @@ Please notice that Docker does **NOT** allow user to bind new folder to a existi
 ## step 3.3: Run the Wallace dataset
 To run the RiboViz with the vignette dataset, you can run:
 ```console
-$ docker exec riboviz2 /bin/bash -c "cd /env ;source setenv.sh ;cd /riboviz/riboviz; nextflow run prep_riboviz.nf -params-file Wallace_2020_JEC21/Wallace_2020_JEC21_2-samples_10p_up12dwn9_CDS_120bpL_120bpR_config.yaml -work-dir Wallace_2020_JEC21/work -ansi-log false
+$ docker exec riboviz2 /bin/bash -c "cd /env ;source setenv.sh ;cd /riboviz/riboviz; nextflow run prep_riboviz.nf -params-file Wallace_2020_JEC21/Wallace_2020_JEC21_2-samples_10p_up12dwn9_CDS_120bpL_120bpR_config.yaml -work-dir Wallace_2020_JEC21/work -ansi-log false"
 ```
 This command will first activate the environment, then run the workflow.
 
