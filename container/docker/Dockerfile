@@ -5,7 +5,7 @@ SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ="Europe/London"
 RUN apt-get update && \
-    apt-get install -y git curl bedtools hdf5-tools pigz nano unzip wget gnupg && \
+    apt-get install -y git curl bedtools hdf5-tools pigz nano unzip wget gnupg pandoc graphviz libgit2-dev libssh2-1  && \
     echo 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'>>/etc/apt/sources.list && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
@@ -19,7 +19,7 @@ SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ="Europe/London"
 RUN cd / && mkdir env && cd env && apt-get update && \
-    apt-get install -y git curl bedtools hdf5-tools pigz nano unzip wget gnupg pandoc graphviz libgit2-dev && \
+    apt-get install -y git curl bedtools hdf5-tools pigz nano unzip wget gnupg pandoc graphviz libgit2-dev libssh2-1 && \
     apt-get autoclean -y && apt-get autoremove -y && \
     wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /env/miniconda3.sh && \
     bash /env/miniconda3.sh -b -p /env/miniconda3 && \
