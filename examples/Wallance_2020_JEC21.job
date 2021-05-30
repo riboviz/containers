@@ -26,4 +26,4 @@ export SINGULARITY_TMPDIR=$TMPDIR
 export SINGULARITY_CACHEDIR=/exports/eddie/scratch/<your id>/cache
 
 cd /exports/eddie/scratch/<your id>/
-singularity -vvv run -B /local:/local -B /exports/eddie/scratch/<your id>/riboviz:/riboviz -B /exports/eddie/scratch/<your id>/Wallace_2020_JEC21:/Wallace_2020_JEC21 riboviz_singularity.sif /bin/bash -c "cd /env;source setenv.sh;cd /riboviz/riboviz/; nextflow run prep_riboviz.nf -params-file Wallace_2020_JEC21/Wallace_2020_JEC21_2-samples_10p_up12dwn9_CDS_120bpL_120bpR_config.yaml -work-dir Wallace_2020_JEC21/work -ansi-log false"
+singularity -vvv run -B /local:/local -B /exports/eddie/scratch/<your id>/riboviz:/riboviz riboviz_singularity.sif /bin/bash -c "cd /env;source setenv.sh;cd /riboviz/riboviz/; nextflow run prep_riboviz.nf -params-file Wallace_2020_JEC21/Wallace_2020_JEC21_2-samples_10p_up12dwn9_CDS_120bpL_120bpR_config.yaml -work-dir Wallace_2020_JEC21/work -ansi-log false"
