@@ -1,6 +1,6 @@
 <h1>Run RiboViz with Docker</h1>
 
-This documentation shows how the user can run RiboViz with Docker.
+This documentation shows how the user can run RiboViz with the latest development version of (Docker) container.
 It is recommended to run containerized RiboViz with Singularity, another containerize tool targets on HPC systems.
 However, we still provide a docker version of RiboViz, for the Docker has a very large community and detailed documentations.
 The guide to run RiboViz with Singularity can be found at [here](./run-with-singularity.md).
@@ -160,7 +160,7 @@ Though the docker image contains the runtime environment of RiboViz, it doesn't 
 The reason is that the RiboViz is under development and updates are made frequently, especially the develop branch. However, the runtime environment will not change for a long time.
 We think that it is unnecessary to rebuild the image every time when the RiboViz updates, we only want to rebuild the image when the runtime environment need to be updated.
 
-To download RiboViz, you need to clone the `https://github.com/riboviz/riboviz.git` repository.
+To download RiboViz, you need to clone the `https://github.com/riboviz/riboviz.git` repository and switch to develop branch.
 You can run the following command, and replace `/your/path` with the path that you wish RiboViz repository to be stored.
 ```console
 $ cd /your/path/

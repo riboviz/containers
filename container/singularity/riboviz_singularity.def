@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: ubuntu:18.04
+From: ubuntu:20.04
 
 %post
     export DEBIAN_FRONTEND="noninteractive"
@@ -8,32 +8,33 @@ From: ubuntu:18.04
     mkdir env
     cd /env && \
     apt-get update && \
-    apt-get install -y git curl bedtools hdf5-tools pigz nano unzip wget gnupg pandoc graphviz libgit2-dev libssh2-1 && \
+    apt-get install -y git curl bedtools hdf5-tools pigz nano unzip wget gnupg pandoc graphviz zip libgit2-dev libssh2-1 && \
     apt-get autoclean -y && apt-get autoremove -y && \
     wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /env/miniconda3.sh && \
     bash /env/miniconda3.sh -b -p /env/miniconda3 && \
     . /env/miniconda3/bin/activate && conda create -y --name riboviz python=3.7 && conda activate riboviz && \
-    conda install -y pyyaml gitpython pytest pandas && \
-    conda install -y -c bioconda cutadapt && \
-    conda install -y -c bioconda pysam && \
-    conda install -y -c bioconda samtools && \
-    conda install -y -c anaconda biopython && \
-    pip install gffutils && \
-    conda install -y -c anaconda h5py && \
-    conda install -y -c bioconda umi_tools && \
-    conda install -y pylint && \
-    conda install -y pycodestyle && \
-    conda install -y pytest-cov && \
-    pip install sphinx && \
+    conda install -y pyyaml=5.3.1 gitpython=3.1.3 pytest=5.4.3 pandas=1.0.5 && \
+    conda install -y -c bioconda cutadapt=1.18 && \
+    conda install -y -c bioconda pysam=0.15.3 && \
+    conda install -y -c bioconda samtools=1.9 && \
+    conda install -y -c anaconda biopython=1.77 && \
+    pip install gffutils==0.10.1 && \
+    conda install -y -c anaconda h5py=2.10.0 && \
+    conda install -y -c bioconda umi_tools=1.0.1 && \
+    conda install -y pylint=2.5.3 && \
+    conda install -y pycodestyle=2.6.0 && \
+    conda install -y pytest-cov=2.10.1 && \
+    pip install sphinx==4.0.1 && \
     wget ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/downloads/hisat2-2.1.0-Linux_x86_64.zip -O /env/hisat2-2.1.0-Linux_x86_64.zip && \
     wget https://sourceforge.net/projects/bowtie-bio/files/bowtie/1.2.2/bowtie-1.2.2-linux-x86_64.zip/download -O /env/bowtie.zip && \
     unzip /env/hisat2-2.1.0-Linux_x86_64.zip && unzip /env/bowtie.zip && \
     export PATH=/root/hisat2-2.1.0:$PATH && export PATH=/root/bowtie-1.2.2-linux-x86_64/:$PATH && \
-    conda install -y -c bioconda nextflow=20.10.0 && \
-    echo 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'>>/etc/apt/sources.list && \
+    conda install -y -c bioconda nextflow=20 && \
+    apt install -y --no-install-recommends software-properties-common dirmngr && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
+    add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     apt-get update && apt-get install -y r-base r-base-dev libxml2-dev libssl-dev libcurl4-openssl-dev && \
-    R -e ".libPaths('/usr/lib/R/library'); install.packages('testthat'); install.packages('RcppRoll'); install.packages('optparse'); install.packages('tidyr'); install.packages('ggplot2'); install.packages('shiny'); install.packages('plotly'); install.packages('readr'); install.packages('git2r'); install.packages('tidyverse'); install.packages('here'); install.packages('BiocManager'); BiocManager::install('Rsamtools'); BiocManager::install('rtracklayer');  BiocManager::install('rhdf5'); BiocManager::install('Biostrings'); BiocManager::install('ShortRead'); install.packages('rmarkdown'); install.packages('knitr');install.packages('lintr'); install.packages('styler'); install.packages('roxygen2'); install.packages('devtools'); install.packages('glue'); install.packages('withr')" && \
+    R -e ".libPaths('/usr/lib/R/library'); install.packages('RcppRoll'); install.packages('git2r');  install.packages('here'); install.packages('knitr'); install.packages('optparse'); install.packages('plotly'); install.packages('rmarkdown'); install.packages('shiny'); install.packages('tidyverse'); install.packages('BiocManager'); BiocManager::install('Biostrings'); BiocManager::install('Rsamtools');  BiocManager::install('ShortRead'); BiocManager::install('rhdf5'); BiocManager::install('rtracklayer');install.packages('devtools');install.packages('glue');install.packages('lintr');install.packages('roxygen2');install.packages('styler');install.packages('testthat');install.packages('withr');" && \
     cd / && mkdir riboviz && mkdir data && cd ~ && touch /env/setenv.sh && echo '#!/bin/bash'>>/env/setenv.sh && echo 'export PATH=/env/hisat2-2.1.0:$PATH'>>/env/setenv.sh && echo 'export PATH=/env/bowtie-1.2.2-linux-x86_64/:$PATH'>>/env/setenv.sh && echo 'source /env/miniconda3/bin/activate'>>/env/setenv.sh && echo 'conda activate riboviz'>>/env/setenv.sh && \
     conda clean -t -y && apt-get -y clean && apt-get -y autoremove && apt-get -y autoclean && rm -rf /env/*.zip && rm -rf /env/miniconda3.sh

@@ -146,7 +146,7 @@ To run the vignette dataset, you can run the following command:
 ```console
 singularity -vvv run -B /local:/local -B /path/to/riboviz:/riboviz <image file> /bin/bash -c "cd /env;source setenv.sh;cd /riboviz; nextflow run prep_riboviz.nf -params-file vignette/vignette_config.yaml -ansi-log false"
 ```
-**If you are running on a local machine, you should omit `-B /local:/local`.**
+**If you are running on a local machine, you can omit `-B /local:/local`.**
 The result can be visited in the `/path/to/riboviz/vignette` folder on host.
 
 Continue with the example in step 2.2, you can run
@@ -180,7 +180,7 @@ You need to setup the following path:
 * `/path/to/riboviz` : The path to your RiboViz (and example-datasets) folder. Inside the folder, there should be two folders, one is `riboviz`, which is the RiboViz in develop branch. The other is `example-datasets`, which is example-datasets in master branch. In the `riboviz` folder, there should be a folder containing the dataset (for example, Wallace_2020_JEC21).
 
 To prepare the dataset, you need to download and install `sratoolkit` to generate fastq files. The documentation on that software can be found at [https://hpc.nih.gov/apps/sratoolkit.html](https://hpc.nih.gov/apps/sratoolkit.html). 
-**If you don't have sratoolkit installed on you PC, you can generate the fastq files on Eddie, then download them to your PC**
+**If you don't have sratoolkit installed on you PC, you can generate the files and folders on Eddie, then download them to your PC**
 
 ``` text
 /path/to/riboviz
@@ -226,7 +226,7 @@ In this situation, the `/path/to/riboviz` should be `/exports/eddie/scratch/$USE
 ### step 3.3: Run full dataset
 To run the full dataset, you can run the following command:
 ```console
-singularity -vvv run -B /local:/local -B /path/to/riboviz:/riboviz <image file> /bin/bash -c "cd /env;source setenv.sh;cd /riboviz; nextflow run prep_riboviz.nf -params-file vignette/vignette_config.yaml -ansi-log false"
+singularity -vvv run -B /local:/local -B /path/to/riboviz:/riboviz <image file> /bin/bash -c "cd /env;source setenv.sh;cd /riboviz/riboviz; nextflow run prep_riboviz.nf -params-file Wallace_2020_JEC21/Wallace_2020_JEC21_2-samples_10p_up12dwn9_CDS_120bpL_120bpR_config.yaml -work-dir Wallace_2020_JEC21/work -ansi-log false"
 ```
 **If you are running on a local machine, you should omit `-B /local:/local`.**
 The result can be visited in the `/path/to/riboviz` folder on host.

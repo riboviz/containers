@@ -1,5 +1,7 @@
 # Containerized RiboViz pipeline
-This repository contains the build scripts of the Singularity and Docker containers of RiboViz pipeline and their documentation.
+This repository contains the build scripts of the Singularity and Docker containers (latest development version) of RiboViz pipeline and their documentation.
+
+To get the latest official release (release 2.1), you can run git checkout 2.1.
 
 * The `container` folder contains the Dockerfile to build a docker image and a Definition file to build a singularity image.
 
