@@ -165,8 +165,6 @@ You can run the following command, and replace `/your/path` with the path that y
 ```console
 $ cd /your/path/
 $ git clone https://github.com/riboviz/riboviz.git
-$ cd riboviz
-$ git checkout develop
 ```
 ## step 2.2: Create a Container
 
@@ -236,8 +234,6 @@ $ cd /your/path/
 $ mkdir riboviz
 $ cd riboviz
 $ git clone https://github.com/riboviz/riboviz.git
-$ cd riboviz
-$ git checkout develop
 ```
 
 To download the example-dataset, you need to clone the `https://github.com/riboviz/example-datasets.git` repository.
