@@ -1,0 +1,29 @@
+#!/bin/sh
+# Grid Engine options (lines prefixed with #$)
+#$ -N example-Wallance
+#$ -cwd
+#$ -l h_rt=8:0:00
+#$ -l h_vmem=16G
+#$ -pe sharedmem 16
+#$ -o $JOB_NAME-$JOB_ID-$HOSTNAME.o
+#$ -e $JOB_NAME-$JOB_ID-$HOSTNAME.e
+#$ -m beas
+#  These options are:
+#  job name: -N
+#  use the current working directory: -cwd
+#  runtime limit of 48 hours: -l h_rt
+#  ask for 8 Gbyte RAM: -l h_vmem
+#  use shared memory parallel environment, request 8 CPUs
+#  redirect output with format jobname-jobID-hostname (jobname -N)
+#  redirect error with same format as output
+#  send email when job starts/ends/aborted/rescheduled
+# Initialise the environment modules
+. /etc/profile.d/modules.sh
+lscpu
+#!/usr/bin/env bash
+module load singularity
+export SINGULARITY_TMPDIR=$TMPDIR
+export SINGULARITY_CACHEDIR=/exports/eddie/scratch/<your id>/cache
+
+cd /exports/eddie/scratch/<your id>/
+singularity -vvv run -B /local:/local -B /exports/eddie/scratch/<your id>/riboviz:/riboviz riboviz_singularity.sif /bin/bash -c "cd /env;source setenv.sh;cd /riboviz/riboviz/; nextflow run prep_riboviz.nf -params-file Wallace_2020_JEC21/Wallace_2020_JEC21_2-samples_10p_up12dwn9_CDS_120bpL_120bpR_config.yaml -work-dir Wallace_2020_JEC21/work -ansi-log false"
